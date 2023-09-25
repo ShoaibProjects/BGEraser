@@ -64,7 +64,7 @@ import java.util.List;
         Intent intesns=getIntent();
         Uri imeges=intesns.getData();
         imggallery.setImageURI(imeges);
-        //try push
+
         /*try {
             backgroundEraser = new MyBackgroundEraser(this);
         } catch (IOException e) {
