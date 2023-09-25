@@ -64,6 +64,7 @@ import java.util.List;
         Intent intesns=getIntent();
         Uri imeges=intesns.getData();
         imggallery.setImageURI(imeges);
+        //try push
         /*try {
             backgroundEraser = new MyBackgroundEraser(this);
         } catch (IOException e) {
@@ -229,14 +230,14 @@ import java.util.List;
                           BGErase.bgfun(bitmapa3);
                           Bitmap reslt=BGErase.bgbitmap;
                           imggallery.setImageBitmap(reslt);
-                    ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+                    /*ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
                     reslt.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream);
                     byte[] byteArray = byteArrayOutputStream.toByteArray();
                     String filename = "ByBGEraser_" + System.currentTimeMillis() + ".jpeg";
                     String uristring=MediaStore.Images.Media.insertImage(getContentResolver(), reslt, filename, null);
                     Uri resuri;
                     resuri= Uri.parse(uristring);
-                    var2.setBgruri(resuri);
+                    var2.setBgruri(resuri);*/
                     /*Bitmap outputBitmap = backgroundEraser.eraseBackground(bitmapa3);
                           imggallery.setImageBitmap(outputBitmap);*/
                     /*try {
