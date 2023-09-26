@@ -41,7 +41,7 @@ public class MainActivity4 extends AppCompatActivity {
             @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
             public void onClick(View v) {
-                String folderName = "MyFolder3";
+                String folderName = "BG Erase Outputs";
 
                 String fileName=null;
                 fileName=filenameet.getText().toString()+".png";
