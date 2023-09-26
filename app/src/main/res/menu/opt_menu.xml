@@ -5,14 +5,16 @@
     <item
         android:id="@+id/opt_new"
         android:icon="@drawable/ic_baseline_help_center_24"
-        android:title="Item 1"
+        android:title="Useless button"
         app:showAsAction="collapseActionView" />
-    <item android:id="@+id/opt_new2"
+    <item
+        android:id="@+id/opt_new2"
         android:icon="@drawable/ic_baseline_home_24"
-        android:title="Item 2"
-        app:showAsAction="collapseActionView"/>
-    <item android:id="@+id/opt_new3"
+        android:title="Another useless button"
+        app:showAsAction="collapseActionView" />
+    <item
+        android:id="@+id/opt_new3"
         android:icon="@drawable/ic_baseline_mode_comment_24"
-        android:title="Item 3"
-        app:showAsAction="collapseActionView"/>
+        android:title="Unclickable button"
+        app:showAsAction="collapseActionView" />
 </menu>

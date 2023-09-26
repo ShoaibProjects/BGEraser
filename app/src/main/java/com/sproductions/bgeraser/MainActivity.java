@@ -54,11 +54,11 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int itemId=item.getItemId();
         if (itemId==R.id.opt_new){
-            Toast.makeText(this, "ok", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "coming soon", Toast.LENGTH_SHORT).show();
         } else if (itemId==R.id.opt_new2){
-            Toast.makeText(this, "ok again", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "feature unavaiblable", Toast.LENGTH_SHORT).show();
         } else if (itemId==R.id.opt_new3){
-            Toast.makeText(this, "ok ok", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "ok", Toast.LENGTH_SHORT).show();
         } /*else if (itemId==android.R.id.home){
             super.onBackPressed();
         }*/

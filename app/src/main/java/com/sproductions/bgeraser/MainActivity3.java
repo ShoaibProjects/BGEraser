@@ -84,13 +84,6 @@ import java.util.concurrent.Future;
 
         cursorView.setCursorSizeSeekBar(cursorSizeSeekBar);
         cursorView.setCursorOffsetSeekBar(handleOffsetSeekBar);*/
-        Button helpBtn=(Button)findViewById(R.id.toolb3settingbutton);
-        helpBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-            }
-        });
         Button saveBtn=(Button)findViewById(R.id.toolb3donebutton);
         saveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -106,9 +99,6 @@ import java.util.concurrent.Future;
         });
         ToggleButton toggleButton1 = findViewById(R.id.manualbutton);
         ToggleButton toggleButton2 = findViewById(R.id.autobutton);
-        ToggleButton toggleButton3 = findViewById(R.id.magicbutton);
-        ToggleButton toggleButton4 = findViewById(R.id.repairbutton);
-        ToggleButton toggleButton5 = findViewById(R.id.zoombutton);
         RadioGroup toggleGroup = findViewById(R.id.toggle_group);
 
 // Set the default selected button
@@ -135,45 +125,16 @@ import java.util.concurrent.Future;
             }
         });
 
-        toggleButton3.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                if (toggleButton3.isChecked()) {
-                    return true;
-                }
-                return false;
-            }
-        });
-        toggleButton4.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                if (toggleButton4.isChecked()) {
-                    return true;
-                }
-                return false;
-            }
-        });
-        toggleButton5.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                if (toggleButton5.isChecked()) {
-                    return true;
-                }
-                return false;
-            }
-        });
+
 
         // Set OnCheckedChangeListener for each button
         toggleButton1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
-                    Toast.makeText(getApplicationContext(), "Button 1 selected", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Intermidiate botton", Toast.LENGTH_SHORT).show();
                     // Perform action when button is selected
                     toggleButton2.setChecked(false);
-                    toggleButton3.setChecked(false);
-                    toggleButton4.setChecked(false);
-                    toggleButton5.setChecked(false);
                     toggleButton1.setTextColor(Color.WHITE);
                     Drawable drawable = toggleButton1.getCompoundDrawables()[1]; // Index 1 represents the DrawableTop
 
@@ -206,12 +167,9 @@ import java.util.concurrent.Future;
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
-                    Toast.makeText(getApplicationContext(), "Button 2 selected", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Processing image, please wait", Toast.LENGTH_SHORT).show();
                     // Perform action when button is selected
                     toggleButton1.setChecked(false);
-                    toggleButton3.setChecked(false);
-                    toggleButton4.setChecked(false);
-                    toggleButton5.setChecked(false);
                     toggleButton2.setTextColor(Color.WHITE);
                     Drawable drawable2 = toggleButton2.getCompoundDrawables()[1]; // Index 1 represents the DrawableTop
 
@@ -283,119 +241,6 @@ import java.util.concurrent.Future;
                 }
             }
         });
-
-        toggleButton3.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked) {
-                    Toast.makeText(getApplicationContext(), "Button 3 selected", Toast.LENGTH_SHORT).show();
-                    // Perform action when button is selected
-                    toggleButton1.setChecked(false);
-                    toggleButton2.setChecked(false);
-                    toggleButton4.setChecked(false);
-                    toggleButton5.setChecked(false);
-                    toggleButton3.setTextColor(Color.WHITE);
-                    Drawable drawable3 = toggleButton3.getCompoundDrawables()[1]; // Index 1 represents the DrawableTop
-
-// Create a ColorFilter object with the desired color
-                    ColorFilter colorFilter3 = new PorterDuffColorFilter(Color.WHITE, PorterDuff.Mode.SRC_IN);
-
-// Apply the ColorFilter to the Drawable
-                    drawable3.mutate().setColorFilter(colorFilter3);
-
-// Set the updated Drawable back to the Button
-                    toggleButton3.setCompoundDrawablesWithIntrinsicBounds(null, drawable3, null, null);
-                } else {
-                    // Perform action when button is deselected
-                    toggleButton3.setTextColor(Color.BLACK);
-                    Drawable drawable3 = toggleButton3.getCompoundDrawables()[1]; // Index 1 represents the DrawableTop
-
-// Create a ColorFilter object with the desired color
-                    ColorFilter colorFilter3 = new PorterDuffColorFilter(Color.BLACK, PorterDuff.Mode.SRC_IN);
-
-// Apply the ColorFilter to the Drawable
-                    drawable3.mutate().setColorFilter(colorFilter3);
-
-// Set the updated Drawable back to the Button
-                    toggleButton3.setCompoundDrawablesWithIntrinsicBounds(null, drawable3, null, null);
-                }
-            }
-        });
-        toggleButton4.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked) {
-                    Toast.makeText(getApplicationContext(), "Button 4 selected", Toast.LENGTH_SHORT).show();
-                    // Perform action when button is selected
-                    toggleButton2.setChecked(false);
-                    toggleButton3.setChecked(false);
-                    toggleButton1.setChecked(false);
-                    toggleButton5.setChecked(false);
-                    toggleButton4.setTextColor(Color.WHITE);
-                    Drawable drawable4 = toggleButton4.getCompoundDrawables()[1]; // Index 1 represents the DrawableTop
-
-// Create a ColorFilter object with the desired color
-                    ColorFilter colorFilter4 = new PorterDuffColorFilter(Color.WHITE, PorterDuff.Mode.SRC_IN);
-
-// Apply the ColorFilter to the Drawable
-                    drawable4.mutate().setColorFilter(colorFilter4);
-
-// Set the updated Drawable back to the Button
-                    toggleButton4.setCompoundDrawablesWithIntrinsicBounds(null, drawable4, null, null);
-                } else {
-                    // Perform action when button is deselected
-                    toggleButton4.setTextColor(Color.BLACK);
-                    Drawable drawable4 = toggleButton4.getCompoundDrawables()[1]; // Index 1 represents the DrawableTop
-
-// Create a ColorFilter object with the desired color
-                    ColorFilter colorFilter4 = new PorterDuffColorFilter(Color.BLACK, PorterDuff.Mode.SRC_IN);
-
-// Apply the ColorFilter to the Drawable
-                    drawable4.mutate().setColorFilter(colorFilter4);
-
-// Set the updated Drawable back to the Button
-                    toggleButton4.setCompoundDrawablesWithIntrinsicBounds(null, drawable4, null, null);
-                }
-            }
-        });
-        toggleButton5.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked) {
-                    Toast.makeText(getApplicationContext(), "Button 5 selected", Toast.LENGTH_SHORT).show();
-                    // Perform action when button is selected
-                    toggleButton2.setChecked(false);
-                    toggleButton3.setChecked(false);
-                    toggleButton4.setChecked(false);
-                    toggleButton1.setChecked(false);
-                    toggleButton5.setTextColor(Color.WHITE);
-                    Drawable drawable5 = toggleButton5.getCompoundDrawables()[1]; // Index 1 represents the DrawableTop
-
-// Create a ColorFilter object with the desired color
-                    ColorFilter colorFilter5 = new PorterDuffColorFilter(Color.WHITE, PorterDuff.Mode.SRC_IN);
-
-// Apply the ColorFilter to the Drawable
-                    drawable5.mutate().setColorFilter(colorFilter5);
-
-// Set the updated Drawable back to the Button
-                    toggleButton5.setCompoundDrawablesWithIntrinsicBounds(null, drawable5, null, null);
-                } else {
-                    // Perform action when button is deselected
-                    toggleButton5.setTextColor(Color.BLACK);
-                    Drawable drawable5 = toggleButton5.getCompoundDrawables()[1]; // Index 1 represents the DrawableTop
-
-// Create a ColorFilter object with the desired color
-                    ColorFilter colorFilter5 = new PorterDuffColorFilter(Color.BLACK, PorterDuff.Mode.SRC_IN);
-
-// Apply the ColorFilter to the Drawable
-                    drawable5.mutate().setColorFilter(colorFilter5);
-
-// Set the updated Drawable back to the Button
-                    toggleButton5.setCompoundDrawablesWithIntrinsicBounds(null, drawable5, null, null);
-                }
-            }
-        });
-
 
     }
 
