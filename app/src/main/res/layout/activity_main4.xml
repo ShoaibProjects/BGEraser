@@ -49,15 +49,6 @@
             tools:srcCompat="@tools:sample/avatars" />
     </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/linearLayout5"
-        android:layout_width="409dp"
-        android:layout_height="200dp"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"/>
-
     <EditText
         android:id="@+id/filenamevar"
         android:layout_width="205dp"

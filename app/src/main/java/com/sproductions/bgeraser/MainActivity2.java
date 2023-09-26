@@ -3,8 +3,6 @@ package com.sproductions.bgeraser;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-
-import android.content.ContentResolver;
 import android.content.ContentUris;
 import android.content.Intent;
 import android.database.Cursor;
@@ -19,15 +17,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
-
-import com.theartofdev.edmodo.cropper.CropImage;
 import com.theartofdev.edmodo.cropper.CropImageView;
-
 import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-
 public class MainActivity2 extends AppCompatActivity {
     variables ver=new variables();
     @Override
@@ -57,7 +48,6 @@ public class MainActivity2 extends AppCompatActivity {
              Bitmap cropped=cropImageView.getCroppedImage();
              Bitmap crop=cropped;
              im.setImageBitmap(cropped);
-                /**/
                ver.setBtmp(crop);
             }
         });

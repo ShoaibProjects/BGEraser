@@ -57,13 +57,14 @@
 
     <LinearLayout
         android:id="@+id/mainbuttons"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_width="400dp"
+        android:layout_height="71dp"
         android:orientation="horizontal"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imgLayout">
 
         <!--        <com.google.android.material.button.MaterialButtonToggleGroup-->
         <!--            android:id="@+id/toggleButton"-->
@@ -138,28 +139,16 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/layoutundoredo"
-        android:layout_width="409dp"
-        android:layout_height="50dp"
-        android:gravity="center"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toTopOf="@+id/mainbuttons"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"/>
-
-    <LinearLayout
         android:id="@+id/imgLayout"
         android:layout_width="409dp"
         android:layout_height="473dp"
         android:gravity="center"
         android:orientation="horizontal"
-        app:layout_constraintBottom_toTopOf="@+id/layoutundoredo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/applayout3">
-       <!-- <com.sproductions.bgeraser.CursorView
+        <!-- <com.sproductions.bgeraser.CursorView
             android:id="@+id/cursor_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>-->

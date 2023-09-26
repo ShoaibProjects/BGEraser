@@ -1,12 +1,9 @@
  package com.sproductions.bgeraser;
 
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.ColorFilter;
-import android.graphics.Paint;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffColorFilter;
 import android.graphics.drawable.Drawable;
@@ -21,29 +18,13 @@ import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.RadioGroup;
-import android.widget.SeekBar;
 import android.widget.Toast;
 import android.widget.ToggleButton;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-
-//import com.sproductions.bgeraser.ml.Tfmodel;
-
-import org.tensorflow.lite.Interpreter;
-import org.tensorflow.lite.support.image.TensorImage;
-import org.tensorflow.lite.support.label.Category;
-
 import java.io.ByteArrayOutputStream;
-import java.nio.ByteBuffer;
-import java.nio.ByteOrder;
-import java.nio.MappedByteBuffer;
-import java.nio.channels.FileChannel;
-import java.io.FileInputStream;
-
 import java.io.IOException;
-import java.util.List;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
@@ -52,11 +33,7 @@ import java.util.concurrent.Future;
 
  public class MainActivity3 extends AppCompatActivity {
     private static final String TAG = "MyActivity";
-    private CursorView cursorView;
-    private SeekBar cursorSizeSeekBar;
-    private SeekBar handleOffsetSeekBar;
      private final ExecutorService conversionExecutor = Executors.newSingleThreadExecutor();
-//    private MyBackgroundEraser backgroundEraser;
     bgkot BGErase=new bgkot();
     variables var2=new variables();
     @Override
@@ -71,19 +48,6 @@ import java.util.concurrent.Future;
         Uri imeges=intesns.getData();
         imggallery.setImageURI(imeges);
 
-        /*try {
-            backgroundEraser = new MyBackgroundEraser(this);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }*/
-
-        // Get CursorView reference
-      /*  cursorView = findViewById(R.id.cursor_view);
-        cursorSizeSeekBar = findViewById(R.id.cursorSizeSeekBar);
-        handleOffsetSeekBar = findViewById(R.id.cursorOffsetSeekBar);
-
-        cursorView.setCursorSizeSeekBar(cursorSizeSeekBar);
-        cursorView.setCursorOffsetSeekBar(handleOffsetSeekBar);*/
         Button saveBtn=(Button)findViewById(R.id.toolb3donebutton);
         saveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -193,38 +157,6 @@ import java.util.concurrent.Future;
 
                           bgprocessed(bitmapa3,imggallery);
 
-
-                          /*BGErase.bgfun(bitmapa3);
-                          Bitmap reslt=BGErase.bgbitmap;
-                          imggallery.setImageBitmap(reslt);*/
-                    /*ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-                    reslt.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream);
-                    byte[] byteArray = byteArrayOutputStream.toByteArray();
-                    String filename = "ByBGEraser_" + System.currentTimeMillis() + ".jpeg";
-                    String uristring=MediaStore.Images.Media.insertImage(getContentResolver(), reslt, filename, null);
-                    Uri resuri;
-                    resuri= Uri.parse(uristring);
-                    var2.setBgruri(resuri);*/
-                    /*Bitmap outputBitmap = backgroundEraser.eraseBackground(bitmapa3);
-                          imggallery.setImageBitmap(outputBitmap);*/
-                    /*try {
-                        Tfmodel model = Tfmodel.newInstance(MainActivity3.this);
-
-                        // Creates inputs for reference.
-                        TensorImage image = TensorImage.fromBitmap(bitmapa3);
-
-                        // Runs model inference and gets result.
-                        Tfmodel.Outputs outputs = model.process(image);
-                        List<Category> segmentationMasks = outputs.getSegmentationMasksAsCategoryList();
-
-                        // Releases model resources if no longer used.
-                        model.close();
-                    } catch (IOException e) {
-                        // TODO Handle the exception
-                    }*/
-
-
-
                 } else {
                     // Perform action when button is deselected
                     toggleButton2.setTextColor(Color.BLACK);
@@ -253,27 +185,6 @@ import java.util.concurrent.Future;
         return super.onOptionsItemSelected(item);
     }
     public void bgprocessed(Bitmap bitmapa3,ImageView imggallery){
-        /*new Thread(new Runnable() {
-            @Override
-            public void run() {
-                // Make API request to remove background
-                BGErase.bgfun(bitmapa3);
-                Bitmap reslt=BGErase.bgbitmap;
-
-                // Update UI with processed bitmap on the main thread
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        // Display the processed bitmap
-                        imggallery.setImageBitmap(reslt);
-
-                        // Convert bitmap to URI if needed
-                        //bitmptouri(reslt);
-var2.setBgruri(resuri);
-                    }
-                });
-            }
-        }).start();*/
         new Thread(new Runnable() {
             @Override
             public void run() {
