@@ -27,17 +27,15 @@
 
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/toolb3donebutton"
-                    android:layout_width="390dp"
+                    android:layout_width="70dp"
                     android:layout_height="54dp"
                     android:background="@color/bg"
                     android:drawableTop="@drawable/ic_baseline_done_24"
-                    android:paddingRight="65dp"
                     android:text="Done"
                     android:textColor="@color/black"
-                    android:textSize="20sp"
+                    android:textSize="14sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>

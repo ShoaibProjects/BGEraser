@@ -3,10 +3,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.sproductions.bgeraser">
 
+    <uses-permission android:name="android.permission.CAMERA" />
+
+    <uses-feature android:name="android.hardware.camera"
+        android:required="true"/>
+    <uses-feature android:name="android.hardware.camera.autofocus" />
+
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE" />
-
 
     <application
         android:allowBackup="true"
@@ -16,7 +21,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.BGEraser"
         tools:replace="android:theme">
-        <activity android:name=".MainActivity4"></activity>
+        <meta-data
+            android:name="com.google.android.actions"
+            android:resource="@xml/file_paths" />
+
+        <activity android:name=".MainActivity4" />
         <activity android:name=".MainActivity3" />
         <activity android:name=".MainActivity2" />
         <activity
@@ -28,6 +37,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" /> <!-- Define your file_paths.xml resource -->
+        </provider>
     </application>
 
 </manifest>

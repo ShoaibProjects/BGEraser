@@ -65,11 +65,13 @@
         android:layout_width="match_parent"
         android:layout_height="125dp"
         android:layout_marginTop="5dp"
-        android:drawableLeft="@drawable/ic_baseline_help_24_hmpage"
-        android:onClick="howtoclick"
-        android:text="How to use"
+        android:drawableLeft="@drawable/baseline_photo_camera_24"
+        android:onClick="camclick"
+        android:text="TAKE A SELFIE"
         android:textColor="#000000"
         android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button1" />
 
     <Button

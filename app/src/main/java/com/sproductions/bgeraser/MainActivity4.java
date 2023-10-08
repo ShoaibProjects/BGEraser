@@ -4,13 +4,10 @@ import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import android.content.Intent;
 import android.graphics.Bitmap;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
-import android.provider.MediaStore;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -22,7 +19,8 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
-public class MainActivity4 extends AppCompatActivity {
+public class
+MainActivity4 extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,13 +30,12 @@ public class MainActivity4 extends AppCompatActivity {
         setSupportActionBar(myToolbar2);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         ImageView imggallery=findViewById(R.id.testiv);
-        Intent intesns=getIntent();
-        Uri imegess=intesns.getData();
-        imggallery.setImageURI(imegess);
+        Bitmap bitmap = BitmapHolder.getBitmap();
+        imggallery.setImageBitmap(bitmap);
         Button saveBton=(Button)findViewById(R.id.saverBton);
         EditText filenameet=findViewById(R.id.filenamevar);
         saveBton.setOnClickListener(new View.OnClickListener() {
-            @RequiresApi(api = Build.VERSION_CODES.N)
+            @RequiresApi(api = Build.VERSION_CODES.R)
             @Override
             public void onClick(View v) {
                 String folderName = "BG Erase Outputs";
@@ -49,14 +46,6 @@ public class MainActivity4 extends AppCompatActivity {
                     Toast.makeText(MainActivity4.this,"Please give a name to your file",Toast.LENGTH_SHORT).show();
                 }
                 else {
-                    Bitmap bitmap;
-                    try {
-                        bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), imegess);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                        return;
-                    }
-
                     File folder = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS), folderName);
                     if (!folder.exists()) {
                         boolean created = folder.mkdir();
@@ -69,7 +58,7 @@ public class MainActivity4 extends AppCompatActivity {
                     File file = new File(folder, fileName);
                     try {
                         FileOutputStream fos = new FileOutputStream(file);
-                        bitmap.compress(Bitmap.CompressFormat.PNG, 100, fos);
+                        bitmap.compress(Bitmap.CompressFormat.WEBP_LOSSLESS, 100, fos);
                         fos.flush();
                         fos.close();
                         String filepath = file.getAbsolutePath();

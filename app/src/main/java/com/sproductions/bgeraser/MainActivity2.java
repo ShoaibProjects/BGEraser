@@ -1,15 +1,15 @@
 package com.sproductions.bgeraser;
 
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import android.content.ContentUris;
+import androidx.core.content.FileProvider;
+import android.content.Context;
 import android.content.Intent;
-import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -18,14 +18,12 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 import com.theartofdev.edmodo.cropper.CropImageView;
-import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+
 public class MainActivity2 extends AppCompatActivity {
     variables ver=new variables();
-    @Override
-    protected void onResume() {
-        super.onResume();
-        deleteOldImages();
-    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,8 +34,8 @@ public class MainActivity2 extends AppCompatActivity {
         myToolbar2.setTitle("ok");
         getSupportActionBar().setTitle("Crop");
         ImageView im=findViewById(R.id.imageView2);
-        Intent in=getIntent();
-        Uri imge=in.getData();
+        Intent in = getIntent();
+        Uri imge = in.getData();
         CropImageView cropImageView=findViewById(R.id.cropImageView);
         cropImageView.setImageUriAsync(imge);
        Button myButton = findViewById(R.id.button4);
@@ -60,7 +58,7 @@ public class MainActivity2 extends AppCompatActivity {
                     Toast.makeText(MainActivity2.this, "Please first crop the image", Toast.LENGTH_SHORT).show();
                 }
                 else {
-                    Uri croppedImageUri=btmpgiver(b);
+                    Uri croppedImageUri=btmpgiver(b,MainActivity2.this);
                     Intent intes=new Intent(MainActivity2.this,MainActivity3.class);
                     intes.setData(croppedImageUri);
                     startActivity(intes);
@@ -69,54 +67,25 @@ public class MainActivity2 extends AppCompatActivity {
         });
 
     }
-    public Uri btmpgiver (Bitmap mybtmp){
-        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-        mybtmp.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream);
-        byte[] byteArray = byteArrayOutputStream.toByteArray();
-        String filename = "ByBGEraser_" + System.currentTimeMillis() + ".jpeg";
-        String uristring=MediaStore.Images.Media.insertImage(getContentResolver(), mybtmp, filename, null);
-        Uri croppedImageUri;
-        croppedImageUri= Uri.parse(uristring);
-        return croppedImageUri;
-    }
-    private void deleteOldImages() {
-        // Define the prefix for your app's images
-        String prefix = "ByBGEraser_";
+    public Uri btmpgiver (Bitmap bitmap, Context context){
 
-        // Calculate the expiration date (in milliseconds)
-        long expirationTime = System.currentTimeMillis() - (1* 24 * 60 * 60 * 1000); // 7 days
-
-        // Define the selection criteria
-        String selection = MediaStore.Images.Media.DISPLAY_NAME + " LIKE ? AND " + MediaStore.Images.Media.DATE_ADDED + " < ?";
-
-        // Define the selection arguments
-        String[] selectionArgs = new String[]{prefix + "%", String.valueOf(expirationTime / 1000)};
-
-        // Query the MediaStore for images matching the selection criteria
-        Cursor cursor = getContentResolver().query(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, null, selection, selectionArgs, null);
-
-        if (cursor != null && cursor.moveToFirst()) {
-            do {
-                // Get the ID of the image to delete
-                long id = cursor.getLong(cursor.getColumnIndex(MediaStore.Images.Media._ID));
-
-                // Make sure the ID is valid
-                if (id >= 0) {
-                    // Construct the content URI for the image
-                    Uri contentUri = ContentUris.withAppendedId(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, id);
-
-                    // Delete the image
-                    getContentResolver().delete(contentUri, null, null);
-                }
-            } while (cursor.moveToNext());
+        // Create a directory to save the image (you can change the directory as needed)
+        File directory = new File(context.getCacheDir(), "images");
+        Uri uri=null;
+        try {
+            directory.mkdirs(); // Create the directory if it doesn't exist
+            File imageFile = new File(directory, "image_" + System.currentTimeMillis() + ".jpg");
+            FileOutputStream outputStream = new FileOutputStream(imageFile);
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, outputStream);
+            outputStream.flush();
+            outputStream.close();
+            uri = FileProvider.getUriForFile(context, context.getPackageName() + ".fileprovider", imageFile);
+        }catch (IOException e) {
+            e.printStackTrace();
+            return null;
         }
-
-        // Close the cursor
-        if (cursor != null) {
-            cursor.close();
-        }
+        return uri;
     }
-
 
     public void btnclk(View v){
     }

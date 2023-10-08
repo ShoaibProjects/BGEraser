@@ -2,6 +2,7 @@
 
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.ColorFilter;
 import android.graphics.PorterDuff;
@@ -23,17 +24,11 @@ import android.widget.ToggleButton;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.util.concurrent.Callable;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
+import java.io.InputStream;
 
  public class MainActivity3 extends AppCompatActivity {
     private static final String TAG = "MyActivity";
-     private final ExecutorService conversionExecutor = Executors.newSingleThreadExecutor();
     bgkot BGErase=new bgkot();
     variables var2=new variables();
     @Override
@@ -53,11 +48,11 @@ import java.util.concurrent.Future;
             @Override
             public void onClick(View view) {
                 Intent saveintent=new Intent(MainActivity3.this,MainActivity4.class);
-                if (var2.bgruri==null){
-                saveintent.setData(imeges);}
-                else {
-                    saveintent.setData(var2.bgruri);
+                if (var2.btmp==null){
+                    Bitmap b=uriToBitmap(imeges);
+                    var2.setBtmp(b);
                 }
+                BitmapHolder.setBitmap(var2.btmp);
                 startActivity(saveintent);
             }
         });
@@ -191,20 +186,6 @@ import java.util.concurrent.Future;
                 // Make API request to remove background and get a processed Bitmap
                 BGErase.bgfun(bitmapa3);
                 Bitmap reslt=BGErase.bgbitmap;
-
-                // Use ExecutorService to convert Bitmap to Uri in a separate thread
-                Future<Uri> uriConversionFuture = conversionExecutor.submit(new Callable<Uri>() {
-                    @Override
-                    public Uri call() throws Exception {
-                        return bitmptouri(reslt);
-                    }
-                });
-
-                try {
-                    // Get the Uri result from the conversion task (this may block until it's done)
-                    Uri imageUrireuri = uriConversionFuture.get();
-
-                    // Update UI with the processed bitmap and imageUri
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
@@ -212,24 +193,27 @@ import java.util.concurrent.Future;
                             imggallery.setImageBitmap(reslt);
 
                             // Use the imageUri as needed
-                            var2.setBgruri(imageUrireuri);
+                            var2.setBtmp(reslt);
                         }
                     });
-                } catch (InterruptedException | ExecutionException e) {
-                    e.printStackTrace();
-                    // Handle exceptions here
-                }
             }
         }).start();
     }
-    public Uri bitmptouri(Bitmap reslt){
-                ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-                reslt.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream);
-                byte[] byteArray = byteArrayOutputStream.toByteArray();
-                String filename = "ByBGEraser_" + System.currentTimeMillis() + ".jpeg";
-                String uristring=MediaStore.Images.Media.insertImage(getContentResolver(), reslt, filename, null);
-                Uri resuri;
-                resuri= Uri.parse(uristring);
-                return resuri;
-    }
+     public Bitmap uriToBitmap(Uri uri) {
+         try {
+             // Use ContentResolver to open the input stream from the Uri
+             InputStream inputStream = getContentResolver().openInputStream(uri);
+
+             // Decode the input stream into a Bitmap
+             Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
+
+             // Close the input stream
+             inputStream.close();
+
+             return bitmap;
+         } catch (IOException e) {
+             e.printStackTrace();
+             return null;
+         }
+     }
 }
